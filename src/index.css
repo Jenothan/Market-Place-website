@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Color Palette:
+  --navy:     #08415c  (deep navy)
+  --red:      #cc2936  (crimson red)
+  --blush:    #ebbab9  (soft blush pink)
+  --teal:     #388697  (ocean teal)
+  --mint:     #b5ffe1  (bright mint)
+*/
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --radius: 0.625rem;
+
+  /* ── Light theme ────────────────────────────────── */
+  --background: #ffffff;
+  --foreground: #08415c;
+
+  --card: #ffffff;
+  --card-foreground: #08415c;
+
+  --popover: #ffffff;
+  --popover-foreground: #08415c;
+
+  --primary: #08415c;
+  --primary-foreground: #ffffff;
+
+  --secondary: #388697;
+  --secondary-foreground: #ffffff;
+
+  --muted: #ebbab9;
+  --muted-foreground: #08415c;
+
+  --accent: #b5ffe1;
+  --accent-foreground: #08415c;
+
+  --destructive: #cc2936;
+
+  --border: #ebbab9;
+  --input: #ebbab9;
+  --ring: #388697;
+
+  --chart-1: #08415c;
+  --chart-2: #388697;
+  --chart-3: #b5ffe1;
+  --chart-4: #ebbab9;
+  --chart-5: #cc2936;
+
+  --sidebar: #08415c;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #b5ffe1;
+  --sidebar-primary-foreground: #08415c;
+  --sidebar-accent: #388697;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #388697;
+  --sidebar-ring: #b5ffe1;
+}
+
+.dark {
+  --background: #0a1e2b;
+  --foreground: #ebbab9;
+
+  --card: #08415c;
+  --card-foreground: #ebbab9;
+
+  --popover: #08415c;
+  --popover-foreground: #ebbab9;
+
+  --primary: #b5ffe1;
+  --primary-foreground: #08415c;
+
+  --secondary: #388697;
+  --secondary-foreground: #ffffff;
+
+  --muted: #0e3044;
+  --muted-foreground: #ebbab9;
+
+  --accent: #388697;
+  --accent-foreground: #ffffff;
+
+  --destructive: #cc2936;
+
+  --border: #388697;
+  --input: #388697;
+  --ring: #b5ffe1;
+
+  --chart-1: #b5ffe1;
+  --chart-2: #388697;
+  --chart-3: #ebbab9;
+  --chart-4: #cc2936;
+  --chart-5: #08415c;
+
+  --sidebar: #0a1e2b;
+  --sidebar-foreground: #ebbab9;
+  --sidebar-primary: #b5ffe1;
+  --sidebar-primary-foreground: #08415c;
+  --sidebar-accent: #388697;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #08415c;
+  --sidebar-ring: #b5ffe1;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ── Direct palette tokens (use as bg-navy, text-teal, etc.) ── */
+  --color-navy: #08415c;
+  --color-crimson: #cc2936;
+  --color-blush: #ebbab9;
+  --color-teal: #388697;
+  --color-mint: #b5ffe1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+  }
+}
