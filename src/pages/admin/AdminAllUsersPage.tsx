@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
     ArrowLeft,
     Users,
     Crown,
     UserCheck,
     Search,
-    Eye,
-    Mail,
-    Loader2,
+    ArrowRight,
+    Loader2
 } from "lucide-react";
 import { Card, CardContent } from "@/components/shared/ui/card";
 import { Button } from "@/components/shared/ui/button";
@@ -84,40 +83,40 @@ export default function AllUsersPage() {
                     </div>
                 </div>
 
-                {/* Summary stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                {/* Summary stats cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
                     <Card className="border-[#ebbab9]/30 shadow-sm">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-[#388697] flex items-center justify-center shadow-md">
-                                <Users className="w-6 h-6 text-white" />
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#388697] flex items-center justify-center shadow-md shrink-0">
+                                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">Total Users</p>
-                                <p className="text-3xl font-bold text-[#08415c]">{totalUsers}</p>
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">Total Users</p>
+                                <p className="text-xl sm:text-2xl font-bold text-[#08415c]">{totalUsers}</p>
                             </div>
                         </CardContent>
                     </Card>
                     <Card className="border-[#ebbab9]/30 shadow-sm">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-[#08415c] flex items-center justify-center shadow-md">
-                                <Crown className="w-6 h-6 text-white" />
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#08415c] flex items-center justify-center shadow-md shrink-0">
+                                <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">Pro Users</p>
-                                <p className="text-3xl font-bold text-[#08415c]">{proUsers}</p>
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">Pro Users</p>
+                                <p className="text-xl sm:text-2xl font-bold text-[#08415c]">{proUsers}</p>
                             </div>
                         </CardContent>
                     </Card>
-                    <Card className="border-[#ebbab9]/30 shadow-sm">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center shadow-md">
-                                <UserCheck className="w-6 h-6 text-white" />
+                    <Card className="border-[#ebbab9]/30 shadow-sm col-span-2 sm:col-span-1">
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-emerald-500 flex items-center justify-center shadow-md shrink-0">
+                                <UserCheck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">
                                     Active Users
                                 </p>
-                                <p className="text-3xl font-bold text-[#08415c]">{activeUsers}</p>
+                                <p className="text-xl sm:text-2xl font-bold text-[#08415c]">{activeUsers}</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -139,12 +138,12 @@ export default function AllUsersPage() {
                             </div>
 
                             {/* Plan filter */}
-                            <div className="flex gap-1.5">
+                            <div className="flex gap-1.5 flex-wrap">
                                 {planFilters.map((p) => (
                                     <button
                                         key={p}
                                         onClick={() => setPlanFilter(p)}
-                                        className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${planFilter === p
+                                        className={`px-3.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold transition-all cursor-pointer ${planFilter === p
                                             ? "bg-[#08415c] text-white shadow-md"
                                             : "bg-gray-100 text-[#08415c] hover:bg-gray-200"
                                             }`}
@@ -155,12 +154,12 @@ export default function AllUsersPage() {
                             </div>
 
                             {/* Status filter */}
-                            <div className="flex gap-1.5">
+                            <div className="flex gap-1.5 flex-wrap">
                                 {statusFilters.map((s) => (
                                     <button
                                         key={s}
                                         onClick={() => setStatusFilter(s)}
-                                        className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === s
+                                        className={`px-3.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold transition-all cursor-pointer ${statusFilter === s
                                             ? "bg-[#08415c] text-white shadow-md"
                                             : "bg-gray-100 text-[#08415c] hover:bg-gray-200"
                                             }`}
@@ -174,92 +173,59 @@ export default function AllUsersPage() {
                 </Card>
 
                 {/* User list */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                     {filtered.map((user) => (
-                        <Card
+                        <Link
                             key={user.id}
-                            className="border-[#ebbab9]/30 shadow-sm hover:shadow-md transition-shadow duration-300"
+                            to={`/dashboard/all-users/${user.id}`}
+                            className="block"
                         >
-                            <CardContent className="p-5">
-                                <div className="flex items-center gap-5">
-                                    {/* Avatar */}
-                                    <div
-                                        className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 font-bold text-sm text-white ${user.plan === "Pro" ? "bg-[#388697]" : "bg-[#08415c]"
-                                            }`}
-                                    >
-                                        {user.name.charAt(0)}
-                                    </div>
+                            <Card className="border-[#ebbab9]/30 shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden border-l-4 border-transparent data-[plan=Pro]:border-l-[#388697]" data-plan={user.plan}>
+                                <CardContent className="p-4 sm:p-5">
+                                    <div className="flex items-center gap-4 sm:gap-6">
+                                        {/* Avatar */}
+                                        <div
+                                            className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 font-bold text-base text-white shadow-sm group-hover:scale-105 transition-transform ${user.plan === "Pro" ? "bg-[#388697]" : "bg-[#08415c]"
+                                                }`}
+                                        >
+                                            {user.name.charAt(0)}
+                                        </div>
 
-                                    {/* Details grid */}
-                                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-5 gap-4 items-center">
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                User Details
-                                            </p>
-                                            <p className="font-semibold text-[#08415c] text-sm">
-                                                {user.name}
-                                            </p>
-                                            <p className="text-xs text-[#388697]">{user.email}</p>
+                                        {/* Content Area */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-0.5">
+                                                        <p className="font-bold text-[#08415c] text-sm sm:text-base truncate">
+                                                            {user.name}
+                                                        </p>
+                                                        {user.plan === "Pro" && <Crown className="w-3.5 h-3.5 text-amber-500 shrink-0" />}
+                                                    </div>
+                                                    <p className="text-xs text-[#388697] truncate">{user.email}</p>
+                                                </div>
+
+                                                <div className="flex items-center justify-between sm:justify-end gap-6 sm:gap-12">
+                                                    <div className="sm:text-right">
+                                                        <p className="text-[10px] text-[#388697] font-bold uppercase tracking-wider mb-0.5">Status</p>
+                                                        <span className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold ${user.status === "Active" ? "bg-emerald-500 text-white" : "bg-amber-100 text-amber-700"}`}>
+                                                            {user.status}
+                                                        </span>
+                                                    </div>
+                                                    <div className="sm:text-right">
+                                                        <p className="text-[10px] text-[#388697] font-bold uppercase tracking-wider mb-0.5">Joined</p>
+                                                        <p className="font-semibold text-[#08415c] text-xs sm:text-sm">{user.joinDate}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                Plan
-                                            </p>
-                                            <span
-                                                className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold ${user.plan === "Pro"
-                                                    ? "bg-[#388697] text-white"
-                                                    : "bg-gray-200 text-[#08415c]"
-                                                    }`}
-                                            >
-                                                {user.plan === "Pro" && (
-                                                    <Crown className="w-3 h-3" />
-                                                )}
-                                                {user.plan}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                Status
-                                            </p>
-                                            <span
-                                                className={`inline-block px-2.5 py-0.5 rounded-md text-xs font-bold ${user.status === "Active"
-                                                    ? "bg-emerald-500 text-white"
-                                                    : "bg-amber-100 text-amber-700"
-                                                    }`}
-                                            >
-                                                {user.status}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                Join Date
-                                            </p>
-                                            <p className="font-semibold text-[#08415c] text-sm">
-                                                {user.joinDate}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-2 justify-end">
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                className="text-[#388697] hover:bg-[#388697]/10 gap-1 cursor-pointer text-xs"
-                                            >
-                                                <Eye className="w-3.5 h-3.5" />
-                                                View
-                                            </Button>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                className="text-[#388697] hover:bg-[#388697]/10 gap-1 cursor-pointer text-xs"
-                                            >
-                                                <Mail className="w-3.5 h-3.5" />
-                                                Email
-                                            </Button>
+
+                                        <div className="shrink-0 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <ArrowRight className="w-5 h-5 text-[#388697]" />
                                         </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </Link>
                     ))}
 
                     {filtered.length === 0 && (

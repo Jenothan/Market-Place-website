@@ -237,6 +237,9 @@ const delay = (ms = 600) => new Promise<void>((res) => setTimeout(res, ms));
 export const fetchAdminUsers = async (): Promise<AdminUser[]> => { await delay(); return adminUsers; };
 export const fetchPendingPayments = async (): Promise<PendingPayment[]> => { await delay(); return pendingPayments; };
 export const fetchRecentApprovals = async (): Promise<Approval[]> => { await delay(); return recentApprovals; };
+export const fetchAdminUserById = async (id: number): Promise<AdminUser | undefined> => { await delay(); return adminUsers.find(u => u.id === id); };
+export const fetchApprovalById = async (id: number): Promise<Approval | undefined> => { await delay(); return recentApprovals.find(a => a.id === id); };
+export const fetchPendingPaymentById = async (id: number): Promise<PendingPayment | undefined> => { await delay(); return pendingPayments.find(p => p.id === id); };
 
 // --- Seller ---
 export const fetchSellerProducts = async (): Promise<SellerProduct[]> => { await delay(); return sellerProducts; };

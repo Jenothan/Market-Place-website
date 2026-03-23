@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
     ArrowLeft,
     CheckCircle2,
@@ -69,45 +69,45 @@ export default function RecentApprovalsPage() {
 
             {!loading && <>
                 {/* Summary stat cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
                     <Card className="border-[#ebbab9]/30 shadow-sm bg-emerald-50">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center shadow-md">
-                                <CheckCircle2 className="w-6 h-6 text-white" />
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-emerald-500 flex items-center justify-center shadow-md shrink-0">
+                                <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">
                                     Total Approved
                                 </p>
-                                <p className="text-3xl font-bold text-[#08415c]">
+                                <p className="text-xl sm:text-3xl font-bold text-[#08415c]">
                                     {totalApproved}
                                 </p>
                             </div>
                         </CardContent>
                     </Card>
                     <Card className="border-[#ebbab9]/30 shadow-sm bg-red-50">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-[#cc2936] flex items-center justify-center shadow-md">
-                                <XCircle className="w-6 h-6 text-white" />
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#cc2936] flex items-center justify-center shadow-md shrink-0">
+                                <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">
                                     Total Rejected
                                 </p>
-                                <p className="text-3xl font-bold text-[#08415c]">
+                                <p className="text-xl sm:text-3xl font-bold text-[#08415c]">
                                     {totalRejected}
                                 </p>
                             </div>
                         </CardContent>
                     </Card>
-                    <Card className="border-[#ebbab9]/30 shadow-sm bg-blue-50">
-                        <CardContent className="p-5 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-[#388697] flex items-center justify-center shadow-md">
-                                <Mail className="w-6 h-6 text-white" />
+                    <Card className="border-[#ebbab9]/30 shadow-sm bg-blue-50 col-span-2 sm:col-span-1">
+                        <CardContent className="p-3.5 sm:p-5 flex items-center gap-3 sm:gap-4">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#388697] flex items-center justify-center shadow-md shrink-0">
+                                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                             </div>
                             <div>
-                                <p className="text-xs text-[#388697] font-medium">Emails Sent</p>
-                                <p className="text-3xl font-bold text-[#08415c]">
+                                <p className="text-[10px] sm:text-xs text-[#388697] font-medium truncate">Emails Sent</p>
+                                <p className="text-xl sm:text-3xl font-bold text-[#08415c]">
                                     {approvals.length}
                                 </p>
                             </div>
@@ -116,89 +116,80 @@ export default function RecentApprovalsPage() {
                 </div>
 
                 {/* Approvals list */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                     {approvals.map((item) => (
-                        <Card
+                        <Link
                             key={item.id}
-                            className="border-[#ebbab9]/30 shadow-sm hover:shadow-md transition-shadow duration-300"
+                            to={`/dashboard/recent-approvals/${item.id}`}
+                            className="block"
                         >
-                            <CardContent className="p-5">
-                                <div className="flex items-center gap-6">
-                                    {/* Status icon */}
-                                    <div
-                                        className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${item.status === "approved"
-                                            ? "bg-emerald-100"
-                                            : "bg-red-100"
-                                            }`}
-                                    >
-                                        {item.status === "approved" ? (
-                                            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                                        ) : (
-                                            <XCircle className="w-5 h-5 text-[#cc2936]" />
-                                        )}
-                                    </div>
+                            <Card
+                                className="border-[#ebbab9]/30 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group border-l-4 border-l-transparent data-[status=approved]:border-l-emerald-500 data-[status=rejected]:border-l-[#cc2936]"
+                                data-status={item.status}
+                            >
+                                <CardContent className="p-4 sm:p-5">
+                                    <div className="flex items-center gap-4 sm:gap-6">
+                                        {/* Left Side: Status & Amount (Mobile) / Icon (Desktop) */}
+                                        <div className="hidden sm:flex w-12 h-12 rounded-full items-center justify-center shrink-0 bg-gray-50 group-hover:bg-white transition-colors border border-gray-100">
+                                            {item.status === "approved" ? (
+                                                <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                                            ) : (
+                                                <XCircle className="w-6 h-6 text-[#cc2936]" />
+                                            )}
+                                        </div>
 
-                                    {/* Details grid */}
-                                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-4 gap-4 items-center">
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                User Details
-                                            </p>
-                                            <p className="font-semibold text-[#08415c] text-sm">
-                                                {item.email}
-                                            </p>
-                                            <p className="text-xs text-[#388697]">{item.name}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                Reference
-                                            </p>
-                                            <p className="font-semibold text-[#08415c] text-sm">
-                                                {item.reference}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                Date Processed
-                                            </p>
-                                            <p className="font-semibold text-[#08415c] text-sm">
-                                                {item.date}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <p className="text-[10px] text-[#388697] font-medium uppercase tracking-wider">
-                                                    Amount
+                                        {/* Main Content Area */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                                                <div className="min-w-0">
+                                                    <div className="flex items-center gap-2 mb-0.5">
+                                                        <p className="font-bold text-[#08415c] truncate text-sm sm:text-base">
+                                                            {item.name}
+                                                        </p>
+                                                        <span className={`inline-block sm:hidden px-2 py-0.5 rounded text-[90%] font-bold text-white ${item.status === "approved" ? "bg-emerald-500" : "bg-[#cc2936]"}`}>
+                                                            {item.status === "approved" ? "✓" : "✕"}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-xs text-[#388697] truncate">{item.email}</p>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 sm:flex sm:items-center gap-4 sm:gap-10">
+                                                    <div className="sm:text-right">
+                                                        <p className="text-[10px] text-[#388697] font-bold uppercase tracking-wider mb-0.5">
+                                                            Reference
+                                                        </p>
+                                                        <p className="font-semibold text-[#08415c] text-xs sm:text-sm truncate font-mono">
+                                                            {item.reference}
+                                                        </p>
+                                                    </div>
+                                                    <div className="sm:text-right">
+                                                        <p className="text-[10px] text-[#388697] font-bold uppercase tracking-wider mb-0.5">
+                                                            Amount
+                                                        </p>
+                                                        <p className={`font-black text-sm sm:text-base ${item.status === "approved" ? "text-[#388697]" : "text-[#cc2936]"}`}>
+                                                            {item.amount}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="hidden sm:flex items-center justify-between mt-3 pt-3 border-t border-[#ebbab9]/10">
+                                                <p className="text-[10px] text-[#388697] font-medium italic truncate max-w-[70%]">
+                                                    {item.note.replace('\n', ' • ')}
                                                 </p>
-                                                <p
-                                                    className={`font-bold text-sm ${item.status === "approved"
-                                                        ? "text-[#388697]"
-                                                        : "text-[#cc2936]"
-                                                        }`}
-                                                >
-                                                    {item.amount}
+                                                <p className="text-[10px] font-bold text-[#388697]/60">
+                                                    Processed on {item.date}
                                                 </p>
                                             </div>
-                                            <div className="text-right">
-                                                <span
-                                                    className={`inline-block px-3 py-1 rounded-lg text-xs font-bold text-white ${item.status === "approved"
-                                                        ? "bg-emerald-500"
-                                                        : "bg-[#cc2936]"
-                                                        }`}
-                                                >
-                                                    {item.status === "approved"
-                                                        ? "✓ Approved"
-                                                        : "✕ Rejected"}
-                                                </span>
-                                                <p className="text-[10px] text-[#388697] mt-1 whitespace-pre-line">
-                                                    {item.note}
-                                                </p>
-                                            </div>
+                                        </div>
+
+                                        <div className="shrink-0 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <ArrowRight className="w-5 h-5 text-[#388697]" />
                                         </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </Link>
                     ))}
                 </div>
 

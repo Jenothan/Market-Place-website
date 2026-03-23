@@ -19,6 +19,9 @@ import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
 import AdminPendingPaymentsPage from "@/pages/admin/AdminPendingPaymentsPage";
 import AdminRecentApprovalsPage from "@/pages/admin/AdminRecentApprovalsPage";
 import AdminAllUsersPage from "@/pages/admin/AdminAllUsersPage";
+import AdminUserDetailPage from "@/pages/admin/AdminUserDetailPage";
+import AdminApprovalDetailPage from "@/pages/admin/AdminApprovalDetailPage";
+import AdminPaymentDetailPage from "@/pages/admin/AdminPaymentDetailPage";
 import AdminSettingsPage from "@/pages/admin/AdminSettingsPage";
 
 function App() {
@@ -42,8 +45,11 @@ function App() {
         <Route path="/dashboard" element={<AdminLayout />}>
           <Route index element={<AdminDashboardPage />} />
           <Route path="pending-payments" element={<AdminPendingPaymentsPage />} />
+          <Route path="pending-payments/:paymentId" element={<AdminPaymentDetailPage />} />
           <Route path="recent-approvals" element={<AdminRecentApprovalsPage />} />
+          <Route path="recent-approvals/:approvalId" element={<AdminApprovalDetailPage />} />
           <Route path="all-users" element={<AdminAllUsersPage />} />
+          <Route path="all-users/:userId" element={<AdminUserDetailPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
         </Route>
       </Routes>

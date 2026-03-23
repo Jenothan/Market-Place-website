@@ -21,14 +21,6 @@ const statMeta = [
     { icon: DollarSign, iconBg: "bg-gradient-to-br from-[#388697] to-[#b5ffe1]", iconColor: "text-[#08415c]" },
 ];
 
-/* ── Workflow steps ──────────────────────────────── */
-const workflowSteps = [
-    { num: 1, title: "View Admin Dashboard", desc: "Current location · Overview of all metrics", color: "bg-[#08415c]" },
-    { num: 2, title: "View Pending Payment Requests", desc: "Review user payment submissions", color: "bg-[#388697]" },
-    { num: 3, title: "Review & Approve/Reject", desc: "Make decisions on payment requests", color: "bg-[#ebbab9]" },
-    { num: 4, title: "System Automation", desc: "Auto-unlock features & send confirmation emails", color: "bg-[#b5ffe1]" },
-];
-
 export default function DashboardPage() {
     const navigate = useNavigate();
     const stats = adminStats.map((s, i) => ({ ...s, ...statMeta[i] }));
@@ -135,40 +127,6 @@ export default function DashboardPage() {
                     </CardContent>
                 </Card>
             </div>
-
-            {/* ── Admin Workflow ────────────────────────── */}
-            <Card className="border-[#ebbab9]/30 shadow-sm">
-                <CardContent className="p-5 sm:p-6">
-                    <h3 className="text-base sm:text-lg font-bold text-[#08415c] mb-6">
-                        Admin Workflow
-                    </h3>
-                    <div className="space-y-6">
-                        {workflowSteps.map((step, i) => (
-                            <div key={step.num} className="flex items-start gap-4 group">
-                                {/* Step number + line */}
-                                <div className="flex flex-col items-center">
-                                    <div
-                                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${step.color} flex items-center justify-center text-xs sm:text-sm font-bold shadow-md ${step.num <= 2 ? "text-white" : "text-[#08415c]"
-                                            }`}
-                                    >
-                                        {step.num}
-                                    </div>
-                                    {i < workflowSteps.length - 1 && (
-                                        <div className="w-0.5 h-8 bg-[#ebbab9]/50 mt-2" />
-                                    )}
-                                </div>
-                                {/* Step content */}
-                                <div className="pt-1 sm:pt-2">
-                                    <p className="font-semibold text-[#08415c] text-xs sm:text-sm group-hover:text-[#388697] transition-colors">
-                                        {step.title}
-                                    </p>
-                                    <p className="text-[10px] sm:text-xs text-[#388697] mt-0.5">{step.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </CardContent>
-            </Card>
         </div>
     );
 }
